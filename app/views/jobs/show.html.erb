@@ -1,0 +1,28 @@
+<h4><%= @job.title %></h4>
+<div> <%= @job.description %> </div>
+<div> <%= @job.status %> </div>
+<p>Created Date: <%= @job.created_at %></p>
+  
+
+<% if user_signed_in? && current_user.applied_job?(@job.id) %>
+   <%= link_to 'Cancel Applied', [@job, current_user.applied_job?(@job.id)], method: :delete, data: { confirm: 'Are you sure?'}, calss: 'btn btn-danger' %>
+<% else%>
+    <h4>Apply Job</h4>
+    <%= form_for [@job, @job.resumes.build] do |form| %>
+
+          <div class="mt-3">
+            <%= form.label :cover_letter, class: 'control-label' %>
+            <%= form.text_area :cover_letter, class: 'form-control' %>
+          </div>
+
+          <div class="mt-3">
+            <%= form.label :attachmet, class: 'control-label' %>
+            <%= form.file_field :attachment, class: 'form-control' %>
+          </div>
+
+          <div class="mt-3">
+            <%= form.submit 'Apply', class: 'btn btn-primary' %>
+          </div> 
+ 
+  <% end %> 
+<% end %>

@@ -1,0 +1,7 @@
+<h3>Resumes</h3>
+
+<h3>Applicant Email : <%= @resume.user.email %> </h3>
+
+<h5><%= @resume.cover_letter %></h5>
+
+<%= link_to 'Download Resume', @resume.attachment_url, download: '', target: :_blank %>

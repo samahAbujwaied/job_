@@ -1,0 +1,23 @@
+<h3>Edit Job</h3>
+
+
+<%= form_for  @job do |form| %>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :status %>
+    <%= form.select :status, [:draft, :published, :completed] %>
+  </div>
+
+  <div>
+    <%= form.submit 'Update Job' %>
+  </div>
+<% end %>

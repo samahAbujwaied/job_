@@ -1,0 +1,32 @@
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Job </th>
+      <th>Email:</th>
+      <th>Seen by Admin</th>
+      <th>Applied At</th>
+      <th>Action</th>
+      
+    </tr>
+  </thead>
+       
+  <tbody>
+    <tr>
+     <% current_user.resumes.each do |resume| %>
+          <% if resume.job %>
+            <td><%= link_to resume.job.title, job_path(resume.job) %></td>
+          <% end %>
+          <td><%= resume.user.email %></td>
+          <td><%= resume.is_seen ? 'Seen' : 'Not seen yet' %></td>
+          <td><%= time_ago_in_words resume.created_at %></td>
+          <td>
+            <%= link_to 'Download', resume.attachment_url, download: '', target: :_blank %>
+          </td>
+       
+        </tr>
+        <%end%>
+  </tbody>
+
+</table>

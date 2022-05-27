@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
+    <%= link_to 'Job Board', root_path, class: 'navbar-brand' %>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to 'Home', root_path, class: 'nav-link' %>
+        </li>
+         <% if can? [:update, :destory], @job %>
+         <li class="nav-item">
+          <%= link_to 'Jobs List', jobs_path, class: 'nav-link' %>
+        </li>
+        <% end %>
+      </ul>
+
+      <ul class="navbar-nav ms-auto">
+        
+        <% if user_signed_in? %>
+          <% if can? :read, Resume%>
+            <li class="nav-item active">
+              <%= link_to 'My Resumes', my_resumes_path, class:'nav-link' %>
+            </li>
+          <% end %>
+
+          <li class="nav-item active">
+            <%= link_to current_user.username, edit_user_registration_path, class:'nav-link' %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:'nav-link' %>
+          </li>
+        <% else %>
+          <li class="nav-item active">
+            <%= link_to 'Signup', new_user_registration_path, class:'nav-link' %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to 'Login', new_user_session_path, class:'nav-link' %>
+          </li>
+        <% end %>
+    </ul>
+    </div>
+  </div>
+</nav> 
